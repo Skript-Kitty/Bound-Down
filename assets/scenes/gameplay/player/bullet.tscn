@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/textures/gameplay/player/bullets/pistol_bullet.png" type="Texture" id=1]
+[ext_resource path="res://assets/scripts/gameplay/player/bullet.gd" type="Script" id=2]
+[ext_resource path="res://assets/scenes/gameplay/player/bullet_reg.tres" type="PhysicsMaterial" id=3]
+[ext_resource path="res://assets/scenes/gameplay/player/bullet_square_collider.tres" type="Shape2D" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "come"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "spin"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="bullet" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 256
+physics_material_override = ExtResource( 3 )
+gravity_scale = 0.0
+script = ExtResource( 2 )
+
+[node name="texture" type="Sprite" parent="."]
+position = Vector2( 3, 1 )
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/come = SubResource( 4 )
+anims/spin = SubResource( 3 )
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2( 2.5, 0.5 )
+shape = ExtResource( 4 )
+
+[node name="timmy" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="backup_timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="t" type="Tween" parent="."]
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+input_pickable = false
+gravity = 0.0
+
+[node name="collider" type="CollisionShape2D" parent="area"]
+position = Vector2( 2.5, 0.5 )
+scale = Vector2( 1.1, 1.1 )
+shape = ExtResource( 4 )
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="timeout" from="timmy" to="." method="_on_timmy_timeout"]
+[connection signal="timeout" from="backup_timer" to="." method="_on_backup_timer_timeout"]
+[connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]

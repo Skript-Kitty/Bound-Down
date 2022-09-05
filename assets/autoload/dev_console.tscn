@@ -1,0 +1,142 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/textures/ui/general/nine_patch.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/ui/general/theme_override/scroll_focus.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/ui/general/theme_override/scroll_hover.png" type="Texture" id=3]
+[ext_resource path="res://assets/font/mainfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/textures/ui/general/theme_override/scroll_no_focus.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/ui/general/theme_override/nine_patch_no_focus.png" type="Texture" id=6]
+[ext_resource path="res://assets/autoload/dev_console.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/ui/rich_text_effects/gray.tres" type="RichTextEffect" id=8]
+[ext_resource path="res://assets/scripts/ui/rich_text_effects/red.tres" type="RichTextEffect" id=9]
+[ext_resource path="res://assets/scripts/ui/rich_text_effects/yellow.tres" type="RichTextEffect" id=10]
+[ext_resource path="res://assets/scripts/ui/rich_text_effects/green.tres" type="RichTextEffect" id=11]
+[ext_resource path="res://assets/textures/ui/general/cursor_one.png" type="Texture" id=12]
+[ext_resource path="res://assets/scripts/ui/mouse.gd" type="Script" id=13]
+[ext_resource path="res://assets/textures/ui/general/cursor_two.png" type="Texture" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="Theme" id=6]
+TextEdit/styles/focus = SubResource( 10 )
+VScrollBar/styles/grabber = SubResource( 1 )
+VScrollBar/styles/grabber_highlight = SubResource( 2 )
+VScrollBar/styles/grabber_pressed = SubResource( 3 )
+VScrollBar/styles/scroll = SubResource( 4 )
+VScrollBar/styles/scroll_focus = SubResource( 5 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 12, 12 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="Theme" id=9]
+LineEdit/colors/font_color_selected = Color( 0.992157, 1, 0, 1 )
+LineEdit/colors/selection_color = Color( 0.196078, 0, 1, 1 )
+LineEdit/styles/focus = SubResource( 7 )
+LineEdit/styles/normal = SubResource( 8 )
+LineEdit/styles/read_only = SubResource( 8 )
+
+[node name="dev_console" type="CanvasLayer"]
+pause_mode = 2
+layer = 128
+script = ExtResource( 7 )
+
+[node name="bg" type="ColorRect" parent="."]
+margin_right = 300.0
+margin_bottom = 200.0
+color = Color( 0.0862745, 0.0901961, 0.101961, 1 )
+
+[node name="console_text" type="RichTextLabel" parent="."]
+margin_left = 1.0
+margin_right = 300.0
+margin_bottom = 176.0
+focus_mode = 2
+theme = SubResource( 6 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+selection_enabled = true
+custom_effects = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
+
+[node name="human_input" type="LineEdit" parent="."]
+margin_top = 176.0
+margin_right = 300.0
+margin_bottom = 200.0
+theme = SubResource( 9 )
+custom_fonts/font = ExtResource( 4 )
+context_menu_enabled = false
+clear_button_enabled = true
+placeholder_text = "INPUT COMMAND"
+placeholder_alpha = 0.7
+caret_blink = true
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 12 )
+script = ExtResource( 13 )
+
+[node name="Sprite2" type="Sprite" parent="Sprite"]
+show_behind_parent = true
+texture = ExtResource( 14 )
+hframes = 15
+vframes = 15
+frame = 113
+
+[node name="focus_steal" type="Button" parent="."]
+margin_left = -57.0
+margin_top = -8.0
+margin_right = -45.0
+margin_bottom = 12.0
+
+[connection signal="text_changed" from="human_input" to="." method="_on_human_input_text_changed"]
