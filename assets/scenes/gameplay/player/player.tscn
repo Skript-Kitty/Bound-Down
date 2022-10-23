@@ -1,10 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/scripts/gameplay/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/gameplay/player/main_character.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/gameplay/player/jetpack_particles.png" type="Texture" id=3]
 [ext_resource path="res://assets/scenes/ui/hud/player_hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/ui/hud/text_box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sound/sfx/player/jump.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/sfx/player/water.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sound/sfx/player/jetpack_1.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sound/sfx/player/jetpack_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/textures/gameplay/player/particles/puff.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -86,6 +91,24 @@ scale_curve = SubResource( 10 )
 color_ramp = SubResource( 8 )
 anim_speed = 1.0
 
+[sub_resource type="CanvasItemMaterial" id=14]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=15]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 75.0
+initial_velocity_random = 0.3
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 75.0
+damping_random = 0.11
+anim_speed = 1.0
+
 [sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
@@ -161,11 +184,22 @@ anims/shoot = SubResource( 4 )
 material = SubResource( 5 )
 position = Vector2( -4, 4 )
 emitting = false
-amount = 10
+amount = 15
 randomness = 0.25
 local_coords = false
 process_material = SubResource( 6 )
 texture = ExtResource( 3 )
+
+[node name="puff" type="Particles2D" parent="player_sprite/jetpack"]
+material = SubResource( 14 )
+position = Vector2( -4, 4 )
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 15 )
+texture = ExtResource( 10 )
 
 [node name="animator" type="AnimationPlayer" parent="player_sprite"]
 anims/RESET = SubResource( 12 )
@@ -312,6 +346,27 @@ visible = false
 [node name="hitbox" type="CollisionShape2D" parent="other_collisions"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 13 )
+
+[node name="sfx" type="Node2D" parent="."]
+visible = false
+
+[node name="jump" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="water" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[node name="jetpack" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource( 8 )
+volume_db = -1.0
+bus = "SFX"
+
+[node name="jetpack_final" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource( 9 )
+volume_db = -15.0
+bus = "SFX"
 
 [connection signal="timeout" from="repeater_wait_timer" to="." method="_on_repeater_wait_timer_timeout"]
 [connection signal="timeout" from="coyote_time" to="." method="_on_coyote_time_timeout"]

@@ -37,7 +37,7 @@ func _ready():
 		if get_children()[i].name == "camera":
 			has_proper_camera = true
 	if not has_proper_camera:
-		print("yeah")
+		print("uh_oh_player_does_not_have_a_camera!!!!")
 		ErrorHandler.throw_error_to_console(str("[red]Err player does not have proper camera.\nFrom ", "player.gd[/red]"))
 		$cam.current = true
 	
@@ -131,11 +131,28 @@ func _physics_process(delta):
 			jetpack_fuel = jetpack_fuel - 1
 			jetpack_fuel = clamp(jetpack_fuel, -JETPACK_FUEL_MAX, JETPACK_FUEL_MAX)
 			
+			if jetpack_fuel == 0:
+				$sfx/jetpack_final.play()
+				movement.y = movement.y + ((JUMP * 0.3) * underwater_multiplier)
+				$player_sprite/jetpack/particles.emitting = false
+				$player_sprite/jetpack/puff.emitting = true
+			else:
+				$sfx/jetpack.play()
+			
 		elif Input.is_action_pressed("jump") and PlayerProgress.player_stuff.has_jetpack and jetpack_fuel > 0 and flag_has_started_jetpacking and not coyote_time:
+			$player_sprite/jetpack/particles.emitting = true
 			movement.y = (JUMP * 0.6) * underwater_multiplier
 			
 			jetpack_fuel = jetpack_fuel - 1
 			jetpack_fuel = clamp(jetpack_fuel, -JETPACK_FUEL_MAX, JETPACK_FUEL_MAX)
+			
+			if jetpack_fuel == 0:
+				movement.y =  movement.y + ((JUMP * 0.3) * underwater_multiplier)
+				$sfx/jetpack_final.play()
+				$player_sprite/jetpack/particles.emitting = false
+				$player_sprite/jetpack/puff.emitting = true
+			else:
+				$sfx/jetpack.play()
 			
 		elif not jetpack_fuel > 0:
 			$player_sprite/jetpack/particles.emitting = false
@@ -147,7 +164,7 @@ func _physics_process(delta):
 			was_on_the_floor = false
 			snap = Vector2.ZERO
 			movement.y = JUMP
-			print(movement.y)
+			$sfx/jump.play()
 			if coyote_time:
 				coyote_time = false
 			
@@ -524,6 +541,7 @@ func _on_other_collisions_area_entered(area):
 	if area.is_in_group("water"):
 		underwater_multiplier = 0.5
 		if movement.y >= TERMINAL_VELOCITY / 2:
+			$sfx/water.play()
 			var particles = preload("res://assets/scenes/particles/player/water_particles.tscn").instance()
 			particles.global_position = self.global_position + Vector2.DOWN * 5
 			get_parent().call_deferred("add_child", particles)
@@ -533,6 +551,7 @@ func _on_other_collisions_area_entered(area):
 func _on_other_collisions_area_exited(area):
 	if area.is_in_group("water"):
 		underwater_multiplier = 1
+		$sfx/water.play()
 		var particles = preload("res://assets/scenes/particles/player/water_particles.tscn").instance()
 		particles.global_position = self.global_position + Vector2.DOWN * 5
 		get_parent().call_deferred("add_child", particles)

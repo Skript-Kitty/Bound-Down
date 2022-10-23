@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://assets/font/into_the_caves.ttf" type="DynamicFontData" id=1]
+
+[resource]
+size = 13
+outline_size = 1
+outline_color = Color( 0.0862745, 0.0901961, 0.101961, 1 )
+font_data = ExtResource( 1 )

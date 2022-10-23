@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/textures/ui/general/nine_patch.png" type="Texture" id=1]
 [ext_resource path="res://assets/font/mainfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/font/main_outline.tres" type="DynamicFont" id=3]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 __meta__ = {
@@ -12,6 +13,19 @@ __meta__ = {
 margin_top = -103.0
 margin_right = 300.0
 margin_bottom = 200.0
+
+[node name="text2" type="RichTextLabel" parent="Control"]
+margin_left = 256.0
+margin_top = 282.0
+margin_right = 457.0
+margin_bottom = 321.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[wave]V"
+text = "V"
+fit_content_height = true
+scroll_active = false
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0
@@ -62,7 +76,7 @@ margin_bottom = 43.0
 rect_clip_content = false
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
-bbcode_text = "Text goes here."
-text = "Text goes here."
+bbcode_text = "Insert text here."
+text = "Insert text here."
 fit_content_height = true
 scroll_active = false

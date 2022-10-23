@@ -1,0 +1,24 @@
+{
+	"base":{"name":"Name", "desc":"Description", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	
+	"w_pistol":{"name":"Rzakczja-2", "desc":"Pronounced \"Zhak-chya 2.\"\nA Polish-made standard-use pistol. A bit weak, yet extremely reliable; also good at long range.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"w_rifle":{"name":"Wolffang-1", "desc":"Outdated…\nAn American automatic rifle effective at medium range. Outdated by a few models, this one has pretty bad accuracy.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"w_blade":{"name":"Alien Blade", "desc":"Looks like a wrench.\nAn alien blade designed to be easy to throw. Extremely effective at close range.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"w_shotgun":{"name":"Awa-awa", "desc":"Glorified bubble wand.\nAn Experimental weapon that launches slightly acidic bubbles in multiple directions. Effective in tight spaces.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	
+	"u_pistol":{"name":"Upgrade Module: Rzakczja", "desc":"Take this to an upgrade station to increase the power of the Rzakczja-2 Pistol.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"u_rifle":{"name":"Upgrade Module: Wolffang", "desc":"Take this to an upgrade station to increase the power of the Wolffang-1 Rifle.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"u_blade":{"name":"Upgrade Module: Blade", "desc":"Take this to an upgrade station to increase the power of the Alien Blade.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"u_shotgun":{"name":"Upgrade Module: Awa-awa", "desc":"Take this to an upgrade station to increase the power of the Awa-awa Shotgun.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	
+	"bandage":{"name":"Bandage", "desc":"Restores around 10% of max HP\nA patch that helps protect wounds, letting them heal.", "consumable":true, "one_use":true, "use_func":"effect_heal_small", "stack_limit":3, "texture_id":0},
+	"health_patch":{"name":"Health Patch", "desc":"Restores around 33% of max HP\nA medical patch that speeds up the immune system. Falls off when finished.", "consumable":true, "one_use":true, "use_func":"effect_heal_medium", "stack_limit":2, "texture_id":0},
+	"life_orb":{"name":"Health Patch", "desc":"Fully restores all HP\nA strange orb that fully heals the body. Afterward it becomes useless.", "consumable":true, "one_use":true, "use_func":"effect_heal_big", "stack_limit":9999, "texture_id":0},
+	
+	"used_bandage":{"name":"Used Bandage", "desc":"A used bandage, completely useless.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":9999, "texture_id":0},
+	"used_patch":{"name":"Used Patch", "desc":"A used health patch, completely useless.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":9999, "texture_id":0},
+	"used_orb":{"name":"Used Orb", "desc":"A used life orb, completely useless.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":9999, "texture_id":0},
+	
+	"jetpack_1":{"name":"Icarus Mk I", "desc":"Press [JUMP] again to Double Jump!\nA jetpack-like device that releases an intense burst of air to launch you up.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+	"jetpack_2":{"name":"Icarus Mk II", "desc":"Press & hold [JUMP] to fly!\nA jetpack-like device that releases an constant stream of air to let you fly! Launches a final burst when it runs out.", "consumable":false, "one_use":false, "use_func":"effect_nothing", "stack_limit":1, "texture_id":0},
+}

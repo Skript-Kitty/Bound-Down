@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/font/mainfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/textures/ui/general/nine_patch.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/texture_base/item_menu.png" type="Texture" id=3]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="text" type="NinePatchRect" parent="."]
+margin_left = 1.0
+margin_top = 153.0
+margin_right = 299.0
+margin_bottom = 199.0
+texture = ExtResource( 2 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="text"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 295.0
+margin_bottom = 43.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Press & hold [JUMP] to fly!
+A jetpack-like device that releases an constant stream of air to let you fly! Launches a final burst when it runs out."
+text = "Press & hold [JUMP] to fly!
+A jetpack-like device that releases an constant stream of air to let you fly! Launches a final burst when it runs out."
+
+[node name="current_item" type="NinePatchRect" parent="."]
+visible = false
+margin_left = 130.0
+margin_top = 49.0
+margin_right = 168.0
+margin_bottom = 71.0
+texture = ExtResource( 2 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="item_description" type="NinePatchRect" parent="."]
+visible = false
+margin_left = 169.0
+margin_top = 50.0
+margin_right = 286.0
+margin_bottom = 70.0
+texture = ExtResource( 2 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="item_description"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 114.0
+margin_bottom = 18.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Upgrade Module: Awa-awa"
+text = "Upgrade Module: Awa-awa"
+scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+z_index = -4
+texture = ExtResource( 3 )
+centered = false

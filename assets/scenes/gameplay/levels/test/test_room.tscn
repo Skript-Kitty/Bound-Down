@@ -197,6 +197,7 @@ centered = false
 position = Vector2( 362, 106 )
 
 [node name="collision" type="TileMap" parent="." groups=["wall"]]
+visible = false
 z_index = 5
 tile_set = SubResource( 8 )
 cell_size = Vector2( 16, 16 )
